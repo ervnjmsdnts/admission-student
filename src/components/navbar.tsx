@@ -1,6 +1,6 @@
 'use client';
 
-import { Eye, LogOut, Pencil, User } from 'lucide-react';
+import { Eye, LogOut, Pencil, UserIcon } from 'lucide-react';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import {
   DropdownMenu,
@@ -19,15 +19,33 @@ import {
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import { User } from '@/lib/types';
 
-export default function Navbar() {
+export default function Navbar({ user }: { user: User }) {
   const [openProfile, setOpenProfile] = useState(false);
   const [openLogout, setOpenLogout] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
 
   const openProfileDialog = () => setOpenProfile(true);
   const openLogoutDialog = () => setOpenLogout(true);
+
+  const handleLogout = async () => {
+    await signOut(auth);
+
+    await fetch('/api/logout');
+
+    localStorage.removeItem('user_id');
+
+    router.replace('/');
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   return (
     <>
@@ -39,24 +57,28 @@ export default function Navbar() {
           <div className='grid gap-2 mt-4'>
             <div className='flex gap-1 items-center'>
               <p className='font-medium'>Name:</p>
-              <p>John Doe</p>
+              <p>{user.name}</p>
             </div>
             <div className='flex gap-1 items-center'>
               <p className='font-medium'>Password:</p>
               <div className='flex gap-2 items-center'>
-                <p>************</p>
-                <Button size='icon' variant='link' className='h-5 w-5'>
+                <p>{showPassword ? user.password : new Array(16).fill('*')}</p>
+                <Button
+                  onClick={handleShowPassword}
+                  size='icon'
+                  variant='link'
+                  className='h-5 w-5'>
                   <Eye className='w-5 h-5' />
                 </Button>
               </div>
             </div>
             <div className='flex gap-1 items-center'>
               <p className='font-medium'>Email Address:</p>
-              <p>johndoe@gmail.com</p>
+              <p>{user.email}</p>
             </div>
             <div className='flex gap-1 items-center'>
-              <p className='font-medium'>Mobile No.:</p>
-              <p>09123456789</p>
+              <p className='font-medium'>Phone No.:</p>
+              <p>{user.phoneNumber}</p>
             </div>
           </div>
           <Button type='button' className='justify-self-end mt-8'>
@@ -76,22 +98,26 @@ export default function Navbar() {
                 Close
               </Button>
             </DialogClose>
-            <Button onClick={() => router.push('/')}>Logout</Button>
+            <Button onClick={handleLogout}>Logout</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
       <nav className='py-4 px-6 bg-primary text-white'>
         <div className='flex items-center justify-between'>
-          <h2>Hello John Doe</h2>
+          <h2>
+            <span className='font-bold'>Hello!</span> {user.name}
+          </h2>
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Avatar>
-                <AvatarFallback className='text-black'>JD</AvatarFallback>
+                <AvatarFallback className='text-black'>
+                  {user.name.split(' ').map((name) => name[0])}
+                </AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem onClick={openProfileDialog}>
-                <User className='mr-2 h-4 w-4' />
+                <UserIcon className='mr-2 h-4 w-4' />
                 <span>Profile</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={openLogoutDialog}>
