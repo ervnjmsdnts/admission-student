@@ -7,12 +7,9 @@ import { useEffect, useState } from 'react';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { Admission } from '@/lib/types';
-import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import StatusBadge from './_components/status-badge';
-
-const capitalFirstLetter = (str: string) =>
-  str.charAt(0).toUpperCase() + str.slice(1);
+import { capitalFirstLetter } from '@/lib/utils';
 
 export default function AdmissionPage() {
   const [admission, setAdmission] = useState<Admission>({} as Admission);

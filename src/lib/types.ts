@@ -5,6 +5,7 @@ export type User = {
   name: string;
   email: string;
   password: string;
+  type: 'new' | 'transferee' | 'returning';
   role: 'user' | 'admin';
   phoneNumber: string;
 };

@@ -22,6 +22,7 @@ import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { User } from '@/lib/types';
+import { capitalFirstLetter } from '@/lib/utils';
 
 export default function Navbar({ user }: { user: User }) {
   const [openProfile, setOpenProfile] = useState(false);
@@ -80,11 +81,11 @@ export default function Navbar({ user }: { user: User }) {
               <p className='font-medium'>Phone No.:</p>
               <p>{user.phoneNumber}</p>
             </div>
+            <div className='flex gap-1 items-center'>
+              <p className='font-medium'>Type:</p>
+              <p>{capitalFirstLetter(user.type ?? '')}</p>
+            </div>
           </div>
-          <Button type='button' className='justify-self-end mt-8'>
-            <Pencil className='mr-2 h-4 w-4' />
-            <p>Edit</p>
-          </Button>
         </DialogContent>
       </Dialog>
       <Dialog open={openLogout} onOpenChange={() => setOpenLogout(false)}>

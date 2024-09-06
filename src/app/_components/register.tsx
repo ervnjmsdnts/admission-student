@@ -8,6 +8,13 @@ import {
   FormLabel,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useToast } from '@/components/ui/use-toast';
 import { auth, db } from '@/lib/firebase';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,6 +33,7 @@ const schema = z
     email: z.string().email(),
     password: z.string(),
     confirmPassword: z.string(),
+    type: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ['confirmPassword'],
@@ -51,6 +59,8 @@ export default function RegisterForm({ action }: { action: () => void }) {
       await setDoc(doc(db, 'users', user.uid), {
         ...data,
         role: 'user',
+        createdAt: new Date().getTime(),
+        isActive: true,
       });
       toast({ title: 'Successfully registered' });
       action();
@@ -130,6 +140,29 @@ export default function RegisterForm({ action }: { action: () => void }) {
                 <FormControl>
                   <Input {...field} type='password' />
                 </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='type'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Type</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder='Select what type of student are you' />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value='new'>New</SelectItem>
+                    <SelectItem value='returning'>Returning</SelectItem>
+                    <SelectItem value='transferee'>Transferee</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormItem>
             )}
           />
