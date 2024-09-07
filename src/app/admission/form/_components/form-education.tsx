@@ -9,13 +9,56 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form';
+import { useEffect, useState } from 'react';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+type Program = {
+  id: string;
+  name: string;
+  createdAt: number;
+};
 
 export default function FormEducation({
   form,
 }: {
   form: UseFormReturn<Inputs>;
 }) {
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const desiredStatus = form.watch('degree.status');
+
+  useEffect(() => {
+    (() => {
+      const programsQuery = query(
+        collection(db, 'programs'),
+        where('isActive', '==', true),
+      );
+      const unsub = onSnapshot(programsQuery, (snapshot) => {
+        const programs = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          return { ...data, id: doc.id };
+        }) as Program[];
+        const sortedPrograms = programs.sort(
+          (a, b) => b.createdAt - a.createdAt,
+        );
+        setPrograms(sortedPrograms);
+        setIsLoading(false);
+      });
+
+      return () => {
+        unsub();
+      };
+    })();
+  }, []);
 
   return (
     <div>
@@ -322,9 +365,23 @@ export default function FormEducation({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>What will your major be?</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
+                <Select
+                  disabled={isLoading}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger disabled={isLoading} ref={field.ref}>
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {programs.map((program) => (
+                      <SelectItem key={program.id} value={program.name}>
+                        {program.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </FormItem>
             )}
           />

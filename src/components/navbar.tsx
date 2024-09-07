@@ -1,6 +1,6 @@
 'use client';
 
-import { Eye, LogOut, Pencil, UserIcon } from 'lucide-react';
+import { Eye, LogOut, UserIcon } from 'lucide-react';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import {
   DropdownMenu,

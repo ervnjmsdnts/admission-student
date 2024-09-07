@@ -13,7 +13,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { format } from 'date-fns';
-import { Calendar } from '@/components/ui/calendar';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   FormControl,
@@ -26,6 +25,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { CalendarPicker } from '@/components/ui/calendar-picker';
 
 const ceremonyItems = [
   {
@@ -166,12 +166,20 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className='w-auto p-0'>
-                  <Calendar
+                  <CalendarPicker
+                    mode='single'
+                    captionLayout='dropdown-buttons'
+                    selected={new Date(field.value)}
+                    onSelect={field.onChange}
+                    fromYear={1960}
+                    toYear={2024}
+                  />
+                  {/* <Calendar
                     mode='single'
                     selected={new Date(field.value)}
                     onSelect={field.onChange}
                     initialFocus
-                  />
+                  /> */}
                 </PopoverContent>
               </Popover>
             </FormItem>

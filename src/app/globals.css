@@ -38,3 +38,7 @@
     @apply h-full w-full;
   }
 }
+
+.rdp-vhidden {
+  @apply hidden;
+}
