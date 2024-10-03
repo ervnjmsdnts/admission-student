@@ -16,11 +16,29 @@ type ParsedInputs = {
 
 export type Admission = {
   id: string;
-  status: 'forReview' | 'rejected' | 'approved';
+  status:
+    | 'forReview'
+    | 'rejected'
+    | 'approved'
+    | 'onGoingExamination'
+    | 'completeExamination';
   userId: string;
   createdAt: number;
+  examination?: {
+    scheduleDate: number;
+    examForm: string;
+    completeExamDate?: number;
+  };
   form: Omit<Inputs, 'documents' | 'dateOfBirth'> & {
     documents: ParsedInputs;
     dateOfBirth: number;
   };
+};
+
+export type Examination = {
+  id: string;
+  program: string;
+  createdAt: number;
+  isActive: boolean;
+  link: string;
 };

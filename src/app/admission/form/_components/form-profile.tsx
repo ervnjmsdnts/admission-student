@@ -174,12 +174,6 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
                     fromYear={1960}
                     toYear={2024}
                   />
-                  {/* <Calendar
-                    mode='single'
-                    selected={new Date(field.value)}
-                    onSelect={field.onChange}
-                    initialFocus
-                  /> */}
                 </PopoverContent>
               </Popover>
             </FormItem>
