@@ -156,7 +156,7 @@ export default function AdmissionPage() {
                           <p>
                             {format(
                               new Date(admission.form.dateOfBirth),
-                              'PPP',
+                              'MMMM dd, yyyy',
                             )}
                           </p>
                         </div>
