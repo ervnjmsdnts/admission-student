@@ -42,3 +42,11 @@ export type Examination = {
   isActive: boolean;
   link: string;
 };
+
+export type Notice = {
+  id: string;
+  title: string;
+  description: string;
+  createdAt: number;
+  isActive: boolean;
+};

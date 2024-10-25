@@ -578,7 +578,9 @@ export default function AdmissionPage() {
                             <TableCell className='text-center'>
                               <Button
                                 disabled={
-                                  admission.status === 'completeExamination'
+                                  admission.status === 'completeExamination' ||
+                                  admission.status === 'approved' ||
+                                  admission.status === 'rejected'
                                 }
                                 onClick={() => setIsOpen(true)}
                                 size='icon'
