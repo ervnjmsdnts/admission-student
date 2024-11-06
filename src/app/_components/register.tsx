@@ -29,7 +29,7 @@ import { z } from 'zod';
 const schema = z
   .object({
     name: z.string(),
-    phoneNumber: z.string(),
+    phoneNumber: z.string().min(11),
     email: z.string().email(),
     password: z.string(),
     confirmPassword: z.string(),
@@ -90,7 +90,14 @@ export default function RegisterForm({ action }: { action: () => void }) {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    onInput={(e) => {
+                      const element = e.target as HTMLInputElement;
+                      element.value = element.value.replace(/[^a-zA-Z\s]/g, '');
+                      field.onChange(e);
+                    }}
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -102,7 +109,18 @@ export default function RegisterForm({ action }: { action: () => void }) {
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    onInput={(e) => {
+                      const inputElement = e.target as HTMLInputElement;
+                      let newValue = inputElement.value.replace(/[^0-9]/g, '');
+                      if (newValue.length > 11) {
+                        newValue = newValue.slice(0, 11);
+                      }
+                      inputElement.value = newValue;
+                      field.onChange(e);
+                    }}
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
