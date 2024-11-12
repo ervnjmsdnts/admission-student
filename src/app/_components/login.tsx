@@ -61,6 +61,19 @@ export default function LoginForm({ action }: { action: () => void }) {
         },
       });
 
+      const dbUserRef = doc(db, 'users', user.uid);
+
+      const dbUser = await getDoc(dbUserRef);
+
+      const dbUserData = dbUser.data() as User;
+
+      const profile = {
+        role: dbUserData.type,
+        name: dbUserData.name,
+        email: dbUserData.email,
+      };
+
+      localStorage.setItem('profile', JSON.stringify(profile));
       localStorage.setItem('user_id', user.uid);
 
       router.push('/admission');

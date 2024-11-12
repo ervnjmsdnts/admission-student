@@ -42,6 +42,7 @@ export default function Navbar({ user }: { user: User }) {
     await fetch('/api/logout');
 
     localStorage.removeItem('user_id');
+    localStorage.removeItem('profile');
 
     window.location.reload();
   };

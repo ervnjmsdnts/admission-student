@@ -20,14 +20,20 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import CompleteExam from './_components/complete-exam';
+import Popup from './popup';
 
 export default function AdmissionPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [admission, setAdmission] = useState<Admission>({} as Admission);
+  const [showPopup, setShowPopup] = useState(false);
   const [examination, setExamination] = useState<Examination>(
     {} as Examination,
   );
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setShowPopup(true);
+  }, []);
 
   useEffect(() => {
     // Fetch admissions first
@@ -92,6 +98,7 @@ export default function AdmissionPage() {
 
   return (
     <>
+      <Popup open={showPopup} onClose={() => setShowPopup(false)} />
       <CompleteExam
         open={isOpen}
         onClose={() => setIsOpen(false)}
