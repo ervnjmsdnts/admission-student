@@ -120,7 +120,7 @@ export default function Popup({
                   </h1>
                   <h2 className='font-semibold'>1. Admission Requirements</h2>
                   <p>
-                    1.1 For admission into the master&apos;s program only those
+                    For admission into the master&apos;s program only those
                     students who graduated in the baccalaureate degree program
                     with at least an average rating of 85% or 2 in the entire
                     course shall be considered eligible. However, by way of
@@ -141,7 +141,7 @@ export default function Popup({
                     School Administrative Assistant and approval by the Dean.
                   </p>
                   <p>
-                    1.2 In certain specific fields of concentration, graduate
+                    In certain specific fields of concentration, graduate
                     students should have had the proper and corresponding
                     undergraduate academic backgrounds or 12 units in the same
                     graduate major being applied for at either undergraduate or
@@ -149,26 +149,26 @@ export default function Popup({
                     graduate degree program.
                   </p>
                   <p>
-                    1.3 Application for admission to the Graduate School should
-                    be filed with the Graduate School Administrative
+                    Application for admission to the Graduate School should be
+                    filed with the Graduate School Administrative
                     Assistant&apos;s Office as early as possible. All the
                     necessary credentials for admission must be submitted during
                     the enrollment period.
                   </p>
                   <p>
-                    1.4 Each application should be accompanied by an official
+                    Each application should be accompanied by an official
                     transcript of undergraduate records for evaluation purposes,
                     Honorable dismissal from the last school attended, Birth
                     Certificate or Marriage certificate for Married woman for
                     the correct spelling of their name and (2) 2x2 ID Pictures.
                   </p>
                   <p>
-                    1.5 The Graduate School Administrative Asst./Dean evaluates
-                    the student for admission.
+                    The Graduate School Administrative Asst./Dean evaluates the
+                    student for admission.
                   </p>
                   <h2 className='font-semibold'>2. Degree Requirements</h2>
                   <p>
-                    2.1 The Graduate School program includes basic and major
+                    The Graduate School program includes basic and major
                     subjects in the field of specialization. The total number of
                     units required for a Master&apos;s degree is 36 units
                     distributed as follows:
@@ -188,23 +188,18 @@ export default function Popup({
                     <p className='text-right'>39 Units</p>
                   </div>
                   <p>
-                    2.2 As a general rule, a candidate for the graduate degree
-                    must be enrolled for at least four semesters or summer
-                    terms.
+                    As a general rule, a candidate for the graduate degree must
+                    be enrolled for at least four semesters or summer terms.
                   </p>
                   <p>
-                    2.3 A thesis is required for the M.A., MAED, and MASED
-                    program. However, in the M.B.A. program, thesis writing is
-                    optional. The students who opt for non-thesis Master&apos;s
-                    program are obliged to comply with the following
-                    requirements:
+                    A thesis is required for the M.A., MAED, and MASED program.
+                    However, in the M.B.A. program, thesis writing is optional.
+                    The students who opt for non-thesis Master&apos;s program
+                    are obliged to comply with the following requirements:
                   </p>
+                  <p>enroll additional 6 units in lieu of thesis writing</p>
                   <p>
-                    2.3.1 enroll additional 6 units in lieu of thesis writing
-                  </p>
-                  <p>
-                    2.3.2 Feasibility study with comprehensive exam and oral
-                    defense.
+                    Feasibility study with comprehensive exam and oral defense.
                   </p>
                   <h2 className='font-semibold'>3. Withdrawal</h2>
                   <h2 className='font-semibold'>
@@ -226,18 +221,18 @@ export default function Popup({
                     <p>below 2.0 No grade Credit</p>
                   </div>
                   <p>
-                    4.1 Incomplete - The work of the student is incomplete owing
-                    to failure to take the final examination or to submit
-                    required reports or term paper, etc. A student who receives
-                    a grade of &quot;Inc&quot; is required to take the necessary
-                    steps to change such a grade within the deadline set by the
+                    Incomplete - The work of the student is incomplete owing to
+                    failure to take the final examination or to submit required
+                    reports or term paper, etc. A student who receives a grade
+                    of &quot;Inc&quot; is required to take the necessary steps
+                    to change such a grade within the deadline set by the
                     professor or within two semester after the &quot;Inc.&quot;
                     has been obtained. Failure to do so within the specified
                     time limit will automatically revert it to a grade of 5.0
                     (failure).
                   </p>
                   <p>
-                    4.2 The passing grade of &quot;2.0&quot; applies both to
+                    The passing grade of &quot;2.0&quot; applies both to
                     academic grades and to the written Comprehensive
                     Examination. A student who receives a grade below
                     &quot;2.0&quot; in a required subject, must repeat the
@@ -246,28 +241,28 @@ export default function Popup({
                     he must repeat the subject or substitute it with another.
                   </p>
                   <p>
-                    4.3 Failure in two subjects disqualifies a student to earn
-                    the degree.
+                    Failure in two subjects disqualifies a student to earn the
+                    degree.
                   </p>
                   <p>
-                    4.4 A student who fails the written comprehensive
-                    examination is allowed to &quot;re-take&quot; only. Failure
-                    in the &quot;re-take&quot; means automatic termination of a
+                    A student who fails the written comprehensive examination is
+                    allowed to &quot;re-take&quot; only. Failure in the
+                    &quot;re-take&quot; means automatic termination of a
                     candidacy for the degree.
                   </p>
                   <p>
-                    4.5 A student who fails the Thesis Defense may take a
+                    A student who fails the Thesis Defense may take a
                     &quot;re-take However, a consensus of 2/3 vote of the Panel
                     is required. With a failure in the &quot;re-oral&quot;,
                     candidacy ends.
                   </p>
                   <p>
-                    4.6 Other reasons for dismissal are: cheating; falsification
-                    of academic records; plagiarism; and criminal acts against
-                    the institution.
+                    Other reasons for dismissal are: cheating; falsification of
+                    academic records; plagiarism; and criminal acts against the
+                    institution.
                   </p>
                   <p>
-                    4.7 After finishing the required number of units or academic
+                    After finishing the required number of units or academic
                     requirements completed-CARMA, a graduate student/s should
                     finished his program and submit thesis within five years.
                     Otherwise, he will have to enroll in nine units (major) for
@@ -285,16 +280,16 @@ export default function Popup({
                     conditions:
                   </p>
                   <p>
-                    5.1 The subjects taken in the school last attended are
+                    The subjects taken in the school last attended are
                     substantially in the same content in the graduate curriculum
                     of the college. 5.2 The residence requirement shall have
                     been complied with.
                   </p>
-                  <p>5.3 Approval of the Dean.</p>
+                  <p>Approval of the Dean.</p>
                   <h2 className='font-semibold'>Unit Loads</h2>
                   <p>
-                    6.1 Regular and Working Graduate Students As per MECS Order
-                    No. 33, series of 1985, the maximum unit load of graduate
+                    Regular and Working Graduate Students As per MECS Order No.
+                    33, series of 1985, the maximum unit load of graduate
                     students in the regular semestral terms and in the summer,
                     sessions will be as follows:
                   </p>
