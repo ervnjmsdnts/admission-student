@@ -574,9 +574,7 @@ export default function AdmissionPage() {
                             </TableCell>
                             <TableCell>
                               <Button asChild variant='link' className='p-0'>
-                                <Link
-                                  target='_blank'
-                                  href={examination.link ?? ''}>
+                                <Link href={examination.link ?? '#'}>
                                   <SquareArrowOutUpRight className='h-4 w-4 mr-2' />
                                   View
                                 </Link>
