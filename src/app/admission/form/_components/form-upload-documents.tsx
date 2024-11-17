@@ -27,7 +27,7 @@ export default function FormUploadDocuments({
           name='documents.honorableDismissal'
           render={({ field: { onChange, value, ...fieldProps } }) => (
             <FormItem>
-              <FormLabel>Honorable Dismissal</FormLabel>
+              <FormLabel>Honorable Dismissal*</FormLabel>
               <FormControl>
                 <Input
                   {...fieldProps}
@@ -46,7 +46,7 @@ export default function FormUploadDocuments({
           name='documents.tor'
           render={({ field: { onChange, value, ...fieldProps } }) => (
             <FormItem>
-              <FormLabel>TOR (Transcript of Records)</FormLabel>
+              <FormLabel>TOR (Transcript of Records)*</FormLabel>
               <FormControl>
                 <Input
                   {...fieldProps}
@@ -65,7 +65,7 @@ export default function FormUploadDocuments({
           name='documents.generalWeightedAverage'
           render={({ field: { onChange, value, ...fieldProps } }) => (
             <FormItem>
-              <FormLabel>General Weighted Average</FormLabel>
+              <FormLabel>General Weighted Average*</FormLabel>
               <FormControl>
                 <Input
                   {...fieldProps}
@@ -84,7 +84,7 @@ export default function FormUploadDocuments({
           name='documents.birthCertificate'
           render={({ field: { onChange, value, ...fieldProps } }) => (
             <FormItem>
-              <FormLabel>Birth Certificate</FormLabel>
+              <FormLabel>Birth Certificate*</FormLabel>
               <FormControl>
                 <Input
                   {...fieldProps}
@@ -122,7 +122,7 @@ export default function FormUploadDocuments({
           name='documents.idPicture'
           render={({ field: { onChange, value, ...fieldProps } }) => (
             <FormItem>
-              <FormLabel>2x2 ID Picture</FormLabel>
+              <FormLabel>2x2 ID Picture*</FormLabel>
               <FormControl>
                 <Input
                   {...fieldProps}

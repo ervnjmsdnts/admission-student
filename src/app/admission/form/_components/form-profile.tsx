@@ -61,7 +61,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
               name='name.family'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Family</FormLabel>
+                  <FormLabel>Family*</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -73,7 +73,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
               name='name.first'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First</FormLabel>
+                  <FormLabel>First*</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -85,7 +85,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
               name='name.middle'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Middle</FormLabel>
+                  <FormLabel>Middle*</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -102,7 +102,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
               name='permanentAddress.town'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Town</FormLabel>
+                  <FormLabel>Town*</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -114,7 +114,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
               name='permanentAddress.province'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Province</FormLabel>
+                  <FormLabel>Province*</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -126,7 +126,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
               name='civilStatus'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Civil Status</FormLabel>
+                  <FormLabel>Civil Status*</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}>
@@ -148,7 +148,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
           name='dateOfBirth'
           render={({ field }) => (
             <FormItem className='grid gap-1.5'>
-              <FormLabel>Date of Birth</FormLabel>
+              <FormLabel>Date of Birth*</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -184,7 +184,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
           name='placeOfBirth'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Place of Birth</FormLabel>
+              <FormLabel>Place of Birth*</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -197,7 +197,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
             name='religion.name'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Religion</FormLabel>
+                <FormLabel>Religion*</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -210,7 +210,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
               name='religion.baptized'
               render={({ field }) => (
                 <FormItem className='flex items-center gap-2'>
-                  <FormLabel>Baptized?</FormLabel>
+                  <FormLabel>Baptized?*</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -238,7 +238,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
               name='religion.confirmed'
               render={({ field }) => (
                 <FormItem className='flex items-center gap-2'>
-                  <FormLabel>Confirmed?</FormLabel>
+                  <FormLabel>Confirmed?*</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -269,7 +269,7 @@ export default function FormProfile({ form }: { form: UseFormReturn<Inputs> }) {
             name='married.isMarried'
             render={({ field }) => (
               <FormItem className='flex items-center gap-2'>
-                <FormLabel>Are you married?</FormLabel>
+                <FormLabel>Are you married?*</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}

@@ -67,10 +67,10 @@ export default function FormEducation({
       </h2>
       <div className='pt-4 grid grid-cols-5 gap-x-6 gap-y-4'>
         <div />
-        <h2 className={cn('font-semibold')}>Name of School</h2>
-        <h2 className='font-semibold'>Town</h2>
-        <h2 className='font-semibold'>Province</h2>
-        <h2 className='font-semibold'>Year</h2>
+        <h2 className={cn('font-semibold')}>Name of School*</h2>
+        <h2 className='font-semibold'>Town*</h2>
+        <h2 className='font-semibold'>Province*</h2>
+        <h2 className='font-semibold'>Year*</h2>
         <p>Elementary</p>
         <FormField
           control={form.control}
@@ -297,7 +297,7 @@ export default function FormEducation({
               name='underGraduateGrade'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Over-All Undergraduate Average Grade</FormLabel>
+                  <FormLabel>Over-All Undergraduate Average Grade*</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -309,7 +309,7 @@ export default function FormEducation({
               name='gradeInMajorSubjects'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Over-All Grade in Major Subjects</FormLabel>
+                  <FormLabel>Over-All Grade in Major Subjects*</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -328,7 +328,7 @@ export default function FormEducation({
             name='degree.status'
             render={({ field }) => (
               <FormItem className='flex items-center gap-2'>
-                <FormLabel>Graduate Status Desired</FormLabel>
+                <FormLabel>Graduate Status Desired*</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
@@ -364,7 +364,7 @@ export default function FormEducation({
             name='degree.desiredDegree'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>What will your major be?</FormLabel>
+                <FormLabel>What will your major be?*</FormLabel>
                 <Select
                   disabled={isLoading}
                   onValueChange={field.onChange}
@@ -396,7 +396,7 @@ export default function FormEducation({
               name='majorFieldUnits'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Major Field</FormLabel>
+                  <FormLabel>Major Field*</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -408,7 +408,7 @@ export default function FormEducation({
               name='minorFieldUnits'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Minor Field</FormLabel>
+                  <FormLabel>Minor Field*</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -423,7 +423,7 @@ export default function FormEducation({
             name='isFullTimeStudent'
             render={({ field }) => (
               <FormItem className='flex items-center gap-2'>
-                <FormLabel>Will you be a full-time student</FormLabel>
+                <FormLabel>Will you be a full-time student*</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
