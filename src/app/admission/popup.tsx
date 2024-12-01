@@ -47,8 +47,6 @@ export default function Popup({
     return steps;
   }, [user]);
 
-  console.log(TEXTS);
-
   useEffect(() => {
     if (!api) {
       return;
@@ -114,7 +112,7 @@ export default function Popup({
                 </div>
               </CarouselItem>
               <CarouselItem className='px-16 max-h-[600px] overflow-y-auto relative image'>
-                <div className='grid relative z-10 gap-4 text-sm'>
+                <div className='grid relative z-10 gap-4 text-sm text-justify'>
                   <h1 className='font-semibold text-primary'>
                     Academic Policies and Regulations
                   </h1>

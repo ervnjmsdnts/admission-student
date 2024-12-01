@@ -3,9 +3,16 @@
 import { Button } from '@/components/ui/button';
 import { Ban, CircleCheck, Loader2, SquareArrowOutUpRight } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { collection, doc, onSnapshot, query, where } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { ChangeEvent, useEffect, useState } from 'react';
+import {
+  collection,
+  doc,
+  onSnapshot,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
+import { db, storage } from '@/lib/firebase';
 import { Admission, Examination } from '@/lib/types';
 import { format } from 'date-fns';
 import StatusBadge from './_components/status-badge';
@@ -21,6 +28,8 @@ import {
 } from '@/components/ui/table';
 import CompleteExam from './_components/complete-exam';
 import Popup from './popup';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function AdmissionPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +39,36 @@ export default function AdmissionPage() {
     {} as Examination,
   );
   const [isLoading, setIsLoading] = useState(true);
+
+  const [isLoadingUpload, setIsLoadingUpload] = useState(false);
+
+  const { toast } = useToast();
+
+  const handleUploadScreenshot = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+
+    try {
+      setIsLoadingUpload(true);
+      toast({ title: 'Uploading screenshot...' });
+      const file = e.target.files[0];
+      const fileRef = ref(storage, `screenshots/${file.name}`);
+      const uploadTask = await uploadBytes(fileRef, file);
+      const url = await getDownloadURL(uploadTask.ref);
+
+      const docRef = doc(db, 'admissions', `${admission.id}`);
+
+      await updateDoc(docRef, {
+        examination: { ...admission.examination, ssProof: url },
+      });
+
+      toast({ title: 'Screenshot uploaded' });
+    } catch (error) {
+      console.log(error);
+      toast({ variant: 'destructive', title: 'Error uploading screenshot' });
+    } finally {
+      setIsLoadingUpload(false);
+    }
+  };
 
   useEffect(() => {
     setShowPopup(true);
@@ -53,8 +92,6 @@ export default function AdmissionPage() {
         setAdmission(currentAdmission);
         setIsLoading(false);
 
-        // Once admission is set, fetch examination if it exists
-        console.log({ admission: currentAdmission });
         if (currentAdmission.examination) {
           const fetchExam = () => {
             const qExam = doc(
@@ -556,7 +593,10 @@ export default function AdmissionPage() {
                         <TableHeader>
                           <TableRow>
                             <TableHead>Schedule</TableHead>
-                            <TableHead></TableHead>
+                            <TableHead>Examination Form</TableHead>
+                            <TableHead>
+                              Screenshot for Proof of Examination
+                            </TableHead>
                             <TableHead className='text-center'>
                               Actions
                             </TableHead>
@@ -580,12 +620,50 @@ export default function AdmissionPage() {
                                 </Link>
                               </Button>
                             </TableCell>
+                            <TableCell>
+                              {admission.examination?.ssProof ? (
+                                <Button className='p-0' asChild variant='link'>
+                                  <a
+                                    target='_blank'
+                                    href={admission.examination.ssProof}>
+                                    View Screenshot
+                                  </a>
+                                </Button>
+                              ) : (
+                                <Button asChild disabled={isLoadingUpload}>
+                                  <div>
+                                    {isLoadingUpload && (
+                                      <Loader2 className='w-4 h-4 mr-2 animate-spin' />
+                                    )}
+                                    <label
+                                      htmlFor='upload-screenshot'
+                                      style={{
+                                        cursor: isLoadingUpload
+                                          ? 'not-allowed'
+                                          : 'pointer',
+                                      }}>
+                                      <input
+                                        disabled={isLoadingUpload}
+                                        type='file'
+                                        accept='image/jpeg, image/png'
+                                        id='upload-screenshot'
+                                        style={{ display: 'none' }}
+                                        onChange={handleUploadScreenshot}
+                                      />
+                                      Upload Screenshot
+                                    </label>
+                                  </div>
+                                </Button>
+                              )}
+                            </TableCell>
                             <TableCell className='text-center'>
                               <Button
                                 disabled={
                                   admission.status === 'completeExamination' ||
                                   admission.status === 'approved' ||
-                                  admission.status === 'rejected'
+                                  admission.status === 'rejected' ||
+                                  admission.status === 'approvedExamination' ||
+                                  admission.status === 'rejectedExamination'
                                 }
                                 onClick={() => setIsOpen(true)}
                                 size='icon'

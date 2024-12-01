@@ -21,13 +21,16 @@ export type Admission = {
     | 'rejected'
     | 'approved'
     | 'onGoingExamination'
-    | 'completeExamination';
+    | 'completeExamination'
+    | 'approvedExamination'
+    | 'rejectedExamination';
   userId: string;
   createdAt: number;
   examination?: {
     scheduleDate: number;
     examForm: string;
     completeExamDate?: number;
+    ssProof?: string;
   };
   form: Omit<Inputs, 'documents' | 'dateOfBirth'> & {
     documents: ParsedInputs;

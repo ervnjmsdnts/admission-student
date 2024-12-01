@@ -25,7 +25,13 @@ import { capitalFirstLetter } from '@/lib/utils';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { format } from 'date-fns';
 
-export default function Navbar({ user }: { user: User }) {
+export default function Navbar({
+  user,
+  hasAdmission,
+}: {
+  user: User;
+  hasAdmission: boolean;
+}) {
   const [openProfile, setOpenProfile] = useState(false);
   const [openLogout, setOpenLogout] = useState(false);
   const [openNotices, setOpenNotices] = useState(false);
@@ -166,21 +172,25 @@ export default function Navbar({ user }: { user: User }) {
             <span className='font-bold'>Hello!</span> {user.name}
           </h2>
           <div className='flex items-center gap-4'>
-            {isLoading ? (
-              <Loader2 className='animate-spin' />
-            ) : (
-              <Button
-                onClick={() => setOpenNotices(true)}
-                size='icon'
-                className='relative border rounded-full'>
-                <Megaphone />
-                {notices.length > 0 && (
-                  <>
-                    <span className='animate-ping absolute inline-flex h-3 w-3 top-0 right-0 rounded-full bg-red-400 opacity-75'></span>
-                    <span className='absolute inline-flex rounded-full h-3 w-3 top-0 right-0 bg-red-400'></span>
-                  </>
+            {hasAdmission && (
+              <>
+                {isLoading ? (
+                  <Loader2 className='animate-spin' />
+                ) : (
+                  <Button
+                    onClick={() => setOpenNotices(true)}
+                    size='icon'
+                    className='relative border rounded-full'>
+                    <Megaphone />
+                    {notices.length > 0 && (
+                      <>
+                        <span className='animate-ping absolute inline-flex h-3 w-3 top-0 right-0 rounded-full bg-red-400 opacity-75'></span>
+                        <span className='absolute inline-flex rounded-full h-3 w-3 top-0 right-0 bg-red-400'></span>
+                      </>
+                    )}
+                  </Button>
                 )}
-              </Button>
+              </>
             )}
             <DropdownMenu>
               <DropdownMenuTrigger>
