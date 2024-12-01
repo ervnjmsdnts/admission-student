@@ -24,6 +24,7 @@ import { Notice, User } from '@/lib/types';
 import { capitalFirstLetter } from '@/lib/utils';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { format } from 'date-fns';
+import Image from 'next/image';
 
 export default function Navbar({
   user,
@@ -168,9 +169,18 @@ export default function Navbar({
       </Dialog>
       <nav className='py-4 px-6 bg-primary text-white'>
         <div className='flex items-center justify-between'>
-          <h2>
-            <span className='font-bold'>Hello!</span> {user.name}
-          </h2>
+          <div className='flex items-center gap-2'>
+            <Image
+              className='bg-white rounded-full p-2'
+              src='/mindoro-school-logo.png'
+              alt='logo'
+              width={50}
+              height={50}
+            />
+            <h2>
+              <span className='font-bold'>Hello!</span> {user.name}
+            </h2>
+          </div>
           <div className='flex items-center gap-4'>
             {hasAdmission && (
               <>

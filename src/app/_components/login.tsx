@@ -15,6 +15,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { Loader2 } from 'lucide-react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -89,9 +90,17 @@ export default function LoginForm({ action }: { action: () => void }) {
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className='bg-white p-4 rounded-lg max-w-md w-full'>
-        <h2 className='text-center text-xl font-semibold text-primary'>
-          Online Admission System
-        </h2>
+        <div className='grid place-items-center gap-2'>
+          <Image
+            src='/mindoro-school-logo.png'
+            width={100}
+            height={100}
+            alt='logo'
+          />
+          <h2 className='text-center text-xl font-semibold text-primary'>
+            Online Admission System
+          </h2>
+        </div>
         <div className='grid mt-4 gap-3'>
           <FormField
             control={form.control}

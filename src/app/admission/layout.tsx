@@ -40,7 +40,7 @@ export default async function AdmissionLayout({ children }: PropsWithChildren) {
 
   const admissions = await getDocs(q);
 
-  const hasUserAdmission = !!admissions.docs[0].data();
+  const hasUserAdmission = !!admissions.docs?.[0]?.data();
 
   return (
     <div className='w-full h-full bg-gray-100 flex flex-col'>
