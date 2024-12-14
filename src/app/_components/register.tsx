@@ -96,25 +96,20 @@ export default function RegisterForm({ action }: { action: () => void }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn('max-w-md w-full', typeWatch && 'max-w-4xl')}>
+        className={cn(
+          'max-w-md w-full mt-8 bg-white p-4 rounded-lg',
+          typeWatch && 'max-w-4xl',
+        )}>
+        <h3 className='text-center font-semibold text-lg'>
+          Student Registration
+        </h3>
         <div
           className={cn(
-            'grid grid-cols-1 w-full bg-white p-4 rounded-lg',
+            'grid grid-cols-1 w-full mt-4',
             typeWatch && 'grid-cols-2 gap-x-4',
           )}>
           <div className='w-full'>
-            <div className='grid place-items-center gap-2'>
-              <Image
-                src='/mindoro-school-logo.png'
-                width={100}
-                height={100}
-                alt='logo'
-              />
-              <h2 className='text-center text-xl font-semibold text-primary'>
-                Online Admission System
-              </h2>
-            </div>
-            <div className='grid mt-4 gap-3'>
+            <div className='grid gap-3'>
               <FormField
                 control={form.control}
                 name='name'
@@ -244,7 +239,7 @@ export default function RegisterForm({ action }: { action: () => void }) {
             <div className='flex gap-4'>
               <Separator orientation='vertical' />
               <div className='flex flex-col gap-2 w-full'>
-                <h3 className='text-xl font-semibold text-center'>
+                <h3 className='text-lg font-semibold text-center'>
                   Requirements
                 </h3>
                 <ul className='flex flex-col gap-4 list-disc'>

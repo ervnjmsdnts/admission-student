@@ -89,19 +89,9 @@ export default function LoginForm({ action }: { action: () => void }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='bg-white p-4 rounded-lg max-w-md w-full'>
-        <div className='grid place-items-center gap-2'>
-          <Image
-            src='/mindoro-school-logo.png'
-            width={100}
-            height={100}
-            alt='logo'
-          />
-          <h2 className='text-center text-xl font-semibold text-primary'>
-            Online Admission System
-          </h2>
-        </div>
-        <div className='grid mt-4 gap-3'>
+        className='bg-white mt-8 p-4 rounded-lg max-w-md w-full'>
+        <h3 className='text-center font-semibold text-lg'>Student Login</h3>
+        <div className='grid gap-3'>
           <FormField
             control={form.control}
             name='email'
