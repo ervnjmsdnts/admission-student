@@ -41,6 +41,7 @@ export default function AdmissionPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   const [isLoadingUpload, setIsLoadingUpload] = useState(false);
+  const [isLoadingReceiptUpload, setIsLoadingReceiptUpload] = useState(false);
 
   const { toast } = useToast();
 
@@ -67,6 +68,34 @@ export default function AdmissionPage() {
       toast({ variant: 'destructive', title: 'Error uploading screenshot' });
     } finally {
       setIsLoadingUpload(false);
+    }
+  };
+
+  const handleUploadReceiptScreenshot = async (
+    e: ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+
+    try {
+      setIsLoadingReceiptUpload(true);
+      toast({ title: 'Uploading receipt...' });
+      const file = e.target.files[0];
+      const fileRef = ref(storage, `screenshots/${file.name}`);
+      const uploadTask = await uploadBytes(fileRef, file);
+      const url = await getDownloadURL(uploadTask.ref);
+
+      const docRef = doc(db, 'admissions', `${admission.id}`);
+
+      await updateDoc(docRef, {
+        examination: { ...admission.examination, ssReceipt: url },
+      });
+
+      toast({ title: 'Receipt uploaded' });
+    } catch (error) {
+      console.log(error);
+      toast({ variant: 'destructive', title: 'Error uploading receipt' });
+    } finally {
+      setIsLoadingReceiptUpload(false);
     }
   };
 
@@ -597,6 +626,9 @@ export default function AdmissionPage() {
                             <TableHead>
                               Screenshot for Proof of Examination
                             </TableHead>
+                            <TableHead>
+                              Screenshot for Examination Receipt
+                            </TableHead>
                             <TableHead className='text-center'>
                               Actions
                             </TableHead>
@@ -656,6 +688,44 @@ export default function AdmissionPage() {
                                 </Button>
                               )}
                             </TableCell>
+                            <TableCell>
+                              {admission.examination?.ssReceipt ? (
+                                <Button className='p-0' asChild variant='link'>
+                                  <a
+                                    target='_blank'
+                                    href={admission.examination.ssReceipt}>
+                                    View Screenshot
+                                  </a>
+                                </Button>
+                              ) : (
+                                <Button
+                                  asChild
+                                  disabled={isLoadingReceiptUpload}>
+                                  <div>
+                                    {isLoadingReceiptUpload && (
+                                      <Loader2 className='w-4 h-4 mr-2 animate-spin' />
+                                    )}
+                                    <label
+                                      htmlFor='upload-receipt'
+                                      style={{
+                                        cursor: isLoadingReceiptUpload
+                                          ? 'not-allowed'
+                                          : 'pointer',
+                                      }}>
+                                      <input
+                                        disabled={isLoadingReceiptUpload}
+                                        type='file'
+                                        accept='image/jpeg, image/png'
+                                        id='upload-receipt'
+                                        style={{ display: 'none' }}
+                                        onChange={handleUploadReceiptScreenshot}
+                                      />
+                                      Upload Receipt
+                                    </label>
+                                  </div>
+                                </Button>
+                              )}
+                            </TableCell>
                             <TableCell className='text-center'>
                               <Button
                                 disabled={
@@ -663,7 +733,11 @@ export default function AdmissionPage() {
                                   admission.status === 'approved' ||
                                   admission.status === 'rejected' ||
                                   admission.status === 'approvedExamination' ||
-                                  admission.status === 'rejectedExamination'
+                                  admission.status === 'rejectedExamination' ||
+                                  !(
+                                    admission?.examination?.ssProof &&
+                                    admission?.examination?.ssReceipt
+                                  )
                                 }
                                 onClick={() => setIsOpen(true)}
                                 size='icon'
